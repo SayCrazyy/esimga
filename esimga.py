@@ -430,14 +430,13 @@ async def main():
         while True:
             await asyncio.sleep(3600) # Keep main thread alive
 
-async info()
-    botinfo = await bot.get_me()
-    print(f"Started, User: {botinfo.username} | Firstname: {botinfo.first_name}")
-
+#async info()
+#    botinfo = await bot.get_me()
+#    print(f"Started, User: {botinfo.username} | Firstname: {botinfo.first_name}")
 
 if __name__ == "__main__":
     with bot:
-        bot.loop.run_until_complete(info())
+        #bot.loop.run_until_complete(info())
         bot.loop.run_until_complete(
             bot.send_message(
                 -1002993082859,
