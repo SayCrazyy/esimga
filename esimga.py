@@ -432,6 +432,8 @@ async def main():
 
 if __name__ == "__main__":
     with bot:
+        botinfo = await bot.get_me()
+        print(f"Started, User: {botinfo.username} | Firstname: {botinfo.first_name}")
         bot.loop.run_until_complete(
             bot.send_message(
                 -1002993082859,
