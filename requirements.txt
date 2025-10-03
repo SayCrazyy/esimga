@@ -1,0 +1,9 @@
+chromedriver-autoinstaller
+asyncio
+aiohttp
+beautifulsoup4
+telethon
+phonenumbers
+requests
+websocket-client
+selenium
