@@ -28,8 +28,8 @@ import os
 # CONFIG
 api_id = 20348321
 api_hash = "f6e0f6c94aaca0670619dbb17ca0e1e4"
-bot_token = "8304882317:AAGoTE9DQG8jzIg8znbFp3an6hJ_kB2vNEU"
-chat_id = -1002959752593
+bot_token = "8382938163:AAHrHTM16st8LjGiuQsGYJ5t2mNUk4PdN9U"
+chat_id = -1002993082859
 
 panels = {
     "1": {
@@ -265,7 +265,7 @@ async def panel_loop(session, panel_name):
                     ]),
                     KeyboardButtonRow([
                         KeyboardButtonUrl("👑 Owner", "https://t.me/xion_ensigma"),
-                        KeyboardButtonUrl("👨‍💻 Developer", "https://t.me/+22893624413")
+                        KeyboardButtonUrl("👨‍💻 Developer", "https://t.me/CrazyTha")
                     ]),
                     KeyboardButtonRow([
                         KeyboardButtonUrl("📞 Numbers", "https://t.me/+zGBLO8pOSylmODMx"),
@@ -438,7 +438,7 @@ if __name__ == "__main__":
                 "<blockquote><b>OTP RECEIVER ON!</b></blockquote>\n🤖 Bot is watching for SMS...",
                 buttons=[
                     [Button.url("👑 Owner", "https://t.me/xion_ensigma")],
-                    [Button.url("👨‍💻 Developer", "https://t.me/+22893624413")],
+                    [Button.url("👨‍💻 Developer", "https://t.me/CrazyTha")],
                     [Button.url("📞 Numbers", "https://t.me/+zGBLO8pOSylmODMx"),
                     Button.url("⏳ OTPS", "https://t.me/xion_otps")],
                 ],
