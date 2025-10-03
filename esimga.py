@@ -185,40 +185,48 @@ def extract_otp(message):
 
 # Scraper
 async def fetch_otp(session, panel_name):
-    #try:
-    loop = asyncio.get_running_loop()
-    html = await loop.run_in_executor(
-        None, session.fetch_page, "/ints/agent/SMSCDRStats", True
-    )
-    soup = BeautifulSoup(html, "html.parser")
-    rows = soup.find_all("tr")
-    if len(rows) < 2:
-        return None
-    cols = rows[1].find_all("td")
-    if len(cols) < 5:
-        return None
-    print(cols)
-    now = cols[0].text.strip()
-    number = cols[2].text.strip()
-    service = cols[3].text.strip()
-    message = cols[5].text.strip()
-    code = extract_otp(message)
-        #with open(panel_name.replace(" ", "-") +'.txt', "a") as f:
-        #    f.write(f"[{panel_name}] OTP - {number} - {service} - {code} - {message}\n\n")
-    return {
-        "panel": panel_name,
-        "num": number,
-        "svc": service,
-        "code": code[0] if code else "N/A",
-        "msg": message,
-        "time": now
-    }
-    #except Exception as e:
-    #    print(f"[{panel_name}] Fetch error:", e)
-    #    with open(panel_name.replace(" ", "-") +'.txt', "a") as f:
-    #        f.write(f"[{panel_name}] Error: {str(e)}\n\n")
-    #    return None
+    try:
+        print("fetch_otp triggered")
+        loop = asyncio.get_running_loop()
+        html = await loop.run_in_executor(
+            None, session.fetch_page, "/ints/agent/SMSCDRStats", True
+        )
+        soup = BeautifulSoup(html, "html.parser")
+        rows = soup.find_all("tr")
 
+        # Check if the table has any data rows
+        if len(rows) < 2:
+            print(f"[{panel_name}] No data rows found in table.")
+            return None
+
+        cols = rows[1].find_all("td")
+        
+        # Check if the row has enough columns (at least 6 for the message)
+        if len(cols) < 6:
+            print(f"[{panel_name}] Row does not have enough columns.")
+            return None
+
+        now = cols[0].text.strip()
+        number = cols[2].text.strip()
+        service = cols[3].text.strip()
+        message = cols[5].text.strip()
+        code = extract_otp(message)
+
+        return {
+            "panel": panel_name,
+            "num": number,
+            "svc": service,
+            "code": code[0] if code else "N/A",
+            "msg": message,
+            "time": now
+        }
+    except Exception as e:
+        # This will now catch any errors and print them without crashing
+        print(f"[{panel_name}] An error occurred in fetch_otp: {e}")
+        # Optionally, write the error to your log file
+        #with open(panel_name.replace(" ", "-") +'.txt', "a") as f:
+        #    f.write(f"[{panel_name}] Error: {str(e)}\n\n")
+        return None
 # Telethon Bot
 bot = TelegramClient("bot3", api_id, api_hash).start(bot_token=bot_token)
 
